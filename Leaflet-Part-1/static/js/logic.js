@@ -40,11 +40,11 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
   // This function determines the color of the marker based on the depth of the earthquake.
   function getColor(depth) {
-    if (depth > 90) return "red";
+    if (depth > 90) return "tomato";
     else if (depth > 70) return "orange";
-    else if (depth > 50) return "darkorange";
+    else if (depth > 50) return "gold";
     else if (depth > 30) return "yellow";
-    else if (depth > 10) return "yellowgreen";
+    else if (depth > 10) return "greenyellow";
     else return "lime";
 }
 
@@ -63,7 +63,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     style: styleInfo,
     // Create a popup for each marker to display the magnitude and location of the earthquake after the marker has been created and styled
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place + "<br>Depth: " + feature.geometry.coordinates[2]);
     }
   // OPTIONAL: Step 2
   // Add the data to the earthquake layer instead of directly to the map.
@@ -80,7 +80,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
     // Initialize depth intervals and colors for the legend
     let depthIntervals = [-10, 10, 30, 50, 70, 90];
-    let colors = ["lime", "yellowgreen", "yellow", "darkorange", "orange", "red"];
+    let colors = ["lime", "greenyellow", "yellow", "gold", "orange", "tomato"];
 
     // Loop through our depth intervals to generate a label with a colored square for each interval.
     for (let i = 0; i < depthIntervals.length; i++) {
